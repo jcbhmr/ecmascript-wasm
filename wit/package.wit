@@ -1,0 +1,55 @@
+// idk. just some ideas
+
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface primitives {
+  type null = option<_>;
+  type undefined = option<_>;
+  resource bigint {}
+  resource symbol {}
+  resource object {
+    get: func(property: string-or-symbol) -> result<any, any>;
+    set: func(property: string-or-symbol, value: any) -> result<any, any>;
+  }
+  resource function {
+    
+  }
+  resource any {}
+  to-string: func(x: any) -> result<string, any>;
+  to-number: func(x: any) -> result<f64, any>;
+  to-object: func(x: any) -> object;
+}
+
+interface global-objects {
+  use primitives.{undefined, any};
+  get-global-this: func() -> object;
+  get-infinity: func() -> f64;
+  get-nan: func() -> f64;
+  get-undefined: func() -> undefined;
+  eval: func(x: string) -> any;
+  is-finite: func(x: f64) -> bool;
+  is-nan: func(x: f64) -> bool;
+  parse-float: func(x: string) -> result<string, any>;
+  parse-int: func(x: string, r: option<u8>) -> result<string, any>;
+  decode-uri: func(x: string) -> result<string, any>;
+  decode-uri-component: func(x: string) -> result<string, any>;
+  encode-uri: func(x: string) -> result<string, any>;
+  encode-uri-component: func(x: string) -> result<string, any>;
+  get-string: func() -> 
+}
+
+interface annex-b {
+  escape: func(a: string) -> string;
+  unescape: func(a: string) -> string;
+
+  // TODO: Add the rest of Annex B
+}
+
+world imports {
+
+
+}
+
+world exports {
+  export ecmascript;
+}
