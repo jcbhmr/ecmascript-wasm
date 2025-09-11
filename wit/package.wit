@@ -1,53 +1,66 @@
-// idk. just some ideas
-
 package jcbhmr:ecmascript-wasm@16.0.0;
 
-interface primitives {
-  type null = option<_>;
-  type undefined = option<_>;
-  resource bigint {}
-  resource symbol {}
-  resource object {
-    get: func(property: string-or-symbol) -> result<any, any>;
-    set: func(property: string-or-symbol, value: any) -> result<any, any>;
+interface core {
+  get-undefined: func() -> value;
+  get-null: func() -> value;
+  get-true: func() -> value;
+  get-false: func() -> value;
+  resource value {
+    get: func(p: borrow<value>) -> result<value, value>;
+    set: func(p: borrow<value>, v: borrow<value>) -> result<_, value>;
+    delete: func(p: borrow<value>) -> result<bool, value>;
+    in: func(r: borrow<value>) -> result<bool, value>;
+    call: func(p: borrow<value>, args: list<value>) -> result<value, value>;
+    invoke: func(args: list<value>) -> result<value, value>;
+    new: func(args: list<value>) -> result<value, value>;
+    %type: func() -> string;
+    to-string: func() -> result<string, value>;
+    to-number: func() -> result<f64, value>;
   }
-  resource function {
-    
-  }
-  resource any {}
-  to-string: func(x: any) -> result<string, any>;
-  to-number: func(x: any) -> result<f64, any>;
-  to-object: func(x: any) -> object;
 }
 
-interface global-objects {
-  use primitives.{undefined, any};
-  get-global-this: func() -> object;
-  get-infinity: func() -> f64;
-  get-nan: func() -> f64;
-  get-undefined: func() -> undefined;
-  eval: func(x: string) -> any;
-  is-finite: func(x: f64) -> bool;
-  is-nan: func(x: f64) -> bool;
-  parse-float: func(x: string) -> result<string, any>;
-  parse-int: func(x: string, r: option<u8>) -> result<string, any>;
-  decode-uri: func(x: string) -> result<string, any>;
-  decode-uri-component: func(x: string) -> result<string, any>;
-  encode-uri: func(x: string) -> result<string, any>;
-  encode-uri-component: func(x: string) -> result<string, any>;
-  get-string: func() -> 
+interface object {
+  type value = s32;
+  resource object {
+    call: static func(value: option<value>) -> value;
+    constructor(value: option<value>);
+  }
+}
+
+interface types {
+
 }
 
 interface annex-b {
   escape: func(a: string) -> string;
   unescape: func(a: string) -> string;
+  
+  string-substr: func(self: string, start: s32, length: option<s32>) -> string;
+  string-anchor: func(self: string, name: string) -> string;
+  string-big: func(self: string) -> string;
+  string-blink: func(self: string) -> string;
+  string-bold: func(self: string) -> string;
+  string-fixed: func(self: string) -> string;
+  string-fontcolor: func(self: string, colour: string) -> string;
+  string-fontsize: func(self: string, size: string) -> string;
+  string-italics: func(self: string) -> string;
+  string-link: func(self: string, url: string) -> string;
+  string-small: func(self: string) -> string;
+  string-strike: func(self: string) -> string;
+  string-sub: func(self: string) -> string;
+  string-sup: func(self: string) -> string;
+  string-trim-left: func(self: string) -> string;
+  string-trim-right: func(self: string) -> string;
 
-  // TODO: Add the rest of Annex B
+  date-get-year: func(self: borrow<date>) -> s32;
+  date-set-year: func(self: borrow<date>, year: s32) -> date;
+  date-to-GMT-string: func(self: borrow<date>) -> string;
+
+  reg-exp-compile: func(self: borrow<reg-exp>, pattern: borrow<reg-exp>) -> reg-exp;
 }
 
 world imports {
-
-
+  export ecmascript;
 }
 
 world exports {
