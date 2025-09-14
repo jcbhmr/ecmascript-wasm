@@ -16,8 +16,6 @@ wkg wit fetch
 
 ## Usage
 
-This is **just the WIT definitions** for the `jcbhmr:ecmascript` interfaces. There is no runtime code here.
-
 TODO: Add usage instructions \
 TODO: Describe the type hierarchy and how to upcast/downcast things
 

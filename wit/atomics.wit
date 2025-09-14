@@ -1,4 +1,4 @@
-package jcbhmr:ecmascript-wasm@16.0.0;
+package jcbhmr:ecmascript@16.0.0;
 
 interface atomics {
   add: func();

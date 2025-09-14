@@ -1,24 +1,45 @@
-package jcbhmr:ecmascript-wasm@16.0.0;
+package jcbhmr:ecmascript@16.0.0;
 
 interface types {
     enum undefined {
         undefined,
     }
+
     enum null {
         null,
     }
+
     resource symbol {
         copy: func() -> symbol;
     }
+
     resource bigint {
         copy: func() -> bigint;
+        add: static func(self: bigint, rhs: bigint) -> bigint;
+        bit-and: static func(self: bigint, rhs: bigint) -> bigint;
+        bit-or: static func(self: bigint, rhs: bigint) -> bigint;
+        bit-xor: static func(self: bigint, rhs: bigint) -> bigint;
+        div: static func(self: bigint, rhs: bigint) -> bigint;
+        mul: static func(self: bigint, rhs: bigint) -> bigint;
+        neg: static func(self: bigint, rhs: bigint) -> bigint;
+        rem: static func(self: bigint, rhs: bigint) -> bigint;
+        shl: static func(self: bigint, rhs: bigint) -> bigint;
+        shr: static func(self: bigint, rhs: bigint) -> bigint;
+        sub: static func(self: bigint, rhs: bigint) -> bigint;
     }
+
     resource object {
-        copy: func() -> object;
+        get: func(p: string-or-symbol) -> value;
     }
-    variant any {
-        undefined(undefined),
-        null(null),
+
+    resource callable {
+        constructor();
+        call: func(args: list<value>) -> result<value, value>;
+    }
+
+    variant value {
+        undefined,
+        null,
         boolean(bool),
         number(f64),
         %string(string),
