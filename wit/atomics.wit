@@ -1,0 +1,16 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface atomics {
+  add: func();
+  and: func();
+  compare-exchange: func();
+  exchange: func();
+  is-lock-free: func();
+  load: func();
+  or: func();
+  sub: func();
+  wait: func();
+  wait-async: func();
+  notify: func();
+  xor: func();
+}

@@ -1,68 +1,34 @@
-package jcbhmr:ecmascript-wasm@16.0.0;
+package jcbhmr:ecmascript@16.0.0;
 
-interface core {
-  get-undefined: func() -> value;
-  get-null: func() -> value;
-  get-true: func() -> value;
-  get-false: func() -> value;
-  resource value {
-    get: func(p: borrow<value>) -> result<value, value>;
-    set: func(p: borrow<value>, v: borrow<value>) -> result<_, value>;
-    delete: func(p: borrow<value>) -> result<bool, value>;
-    in: func(r: borrow<value>) -> result<bool, value>;
-    call: func(p: borrow<value>, args: list<value>) -> result<value, value>;
-    invoke: func(args: list<value>) -> result<value, value>;
-    new: func(args: list<value>) -> result<value, value>;
-    %type: func() -> string;
-    to-string: func() -> result<string, value>;
-    to-number: func() -> result<f64, value>;
-  }
-}
-
-interface object {
-  type value = s32;
-  resource object {
-    call: static func(value: option<value>) -> value;
-    constructor(value: option<value>);
-  }
-}
-
-interface types {
-
-}
-
+/// The ECMAScript language syntax and semantics defined in this annex are /
+/// required when the ECMAScript host is a web browser. The content of this annex
+/// is normative but optional if the ECMAScript host is not a web browser.
+///
+/// NOTE: This annex describes various legacy features and other characteristics
+/// of web browser ECMAScript hosts. All of the language features and behaviours
+/// specified in this annex have one or more undesirable characteristics and in
+/// the absence of legacy usage would be removed from this specification. However,
+/// the usage of these features by large numbers of existing web pages means that
+/// web browsers must continue to support them. The specifications in this annex
+/// define the requirements for interoperable implementations of these legacy
+/// features.
+///
+/// These features are not considered part of the core ECMAScript language.
+/// Programmers should not use or assume the existence of these features and
+/// behaviours when writing new ECMAScript code. ECMAScript implementations are
+/// discouraged from implementing these features unless the implementation is part
+/// of a web browser or is required to run the same legacy ECMAScript code that
+/// web browsers encounter.
 interface annex-b {
-  escape: func(a: string) -> string;
-  unescape: func(a: string) -> string;
-  
-  string-substr: func(self: string, start: s32, length: option<s32>) -> string;
-  string-anchor: func(self: string, name: string) -> string;
-  string-big: func(self: string) -> string;
-  string-blink: func(self: string) -> string;
-  string-bold: func(self: string) -> string;
-  string-fixed: func(self: string) -> string;
-  string-fontcolor: func(self: string, colour: string) -> string;
-  string-fontsize: func(self: string, size: string) -> string;
-  string-italics: func(self: string) -> string;
-  string-link: func(self: string, url: string) -> string;
-  string-small: func(self: string) -> string;
-  string-strike: func(self: string) -> string;
-  string-sub: func(self: string) -> string;
-  string-sup: func(self: string) -> string;
-  string-trim-left: func(self: string) -> string;
-  string-trim-right: func(self: string) -> string;
+  use types.{string-object as types-string-object};
 
-  date-get-year: func(self: borrow<date>) -> s32;
-  date-set-year: func(self: borrow<date>, year: s32) -> date;
-  date-to-GMT-string: func(self: borrow<date>) -> string;
+  escape: func(%string: string) -> string;
+  unescape: func(%string: string) -> string;
 
-  reg-exp-compile: func(self: borrow<reg-exp>, pattern: borrow<reg-exp>) -> reg-exp;
-}
+  resource string-object {
+    constructor(%string: types-string-object);
+    into-inner: static func(%string: string-object) -> types-string-object;
 
-world imports {
-  export ecmascript;
-}
-
-world exports {
-  export ecmascript;
+    substr: func(start: s32, length: option<>)
+  }
 }

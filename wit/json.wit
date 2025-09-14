@@ -1,0 +1,6 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface json {
+    parse: func();
+    stringify: func();
+}

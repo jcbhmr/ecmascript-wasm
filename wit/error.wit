@@ -1,0 +1,18 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface error {
+    use types.{any};
+    record options {
+        cause: option<any>,
+    }
+    resource error {
+        copy: func() -> error;
+        as-object: func() -> object;
+        from-object: static func(v: object) -> option<error>;
+        construct: static func(message: option<string>, options: option<options>) -> result<error, any>;
+        get-message: func() -> string;
+        get-name: func() -> string;
+        get-cause: func() -> option<any>;
+        to-string: func() -> string;
+    }
+}

@@ -1,24 +1,29 @@
 # JavaScript bindings for WebAssembly
 
-🔌 WIT definitions for ECMAScript types
+🔌 WIT definitions for [ECMAScript](https://tc39.es/ecma262/multipage/) types
+
+<p align=center>
+  TODO: Image here
+</p>
+
+## Installation
+
+TODO: Clarify installation instructions
+
+```sh
+wkg wit fetch
+```
 
 ## Usage
 
-```wit
-package example:hello;
+TODO: Add usage instructions
 
-interface greet {
-  func greet(name: string);
-}
+![](https://i.imgur.com/MsRXDwM.png)
 
-world hello {
-    include jcbhmr:ecmascript-wasm/imports@0.3.0;
-    export greet;
-}
-```
+## Development
 
-```rs
-fn greet(name: String) {
-    let 
-}
-```
+Dependencies:
+
+- [wkg](https://github.com/bytecodealliance/wasm-pkg-tools)
+
+This is **just the WIT definitions** for the `jcbhmr:ecmascript` interfaces. There is no runtime code here.

@@ -1,0 +1,29 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface types {
+    enum undefined {
+        undefined,
+    }
+    enum null {
+        null,
+    }
+    resource symbol {
+        copy: func() -> symbol;
+    }
+    resource bigint {
+        copy: func() -> bigint;
+    }
+    resource object {
+        copy: func() -> object;
+    }
+    variant any {
+        undefined(undefined),
+        null(null),
+        boolean(bool),
+        number(f64),
+        %string(string),
+        symbol(symbol),
+        bigint(bigint),
+        object(object),
+    }
+}

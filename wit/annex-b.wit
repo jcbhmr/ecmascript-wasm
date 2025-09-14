@@ -1,0 +1,37 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface annex-b-globals {
+    escape: func(a: string) -> string;
+    unescape: func(a: string) -> string;
+}
+
+interface annex-b-string {
+    substr: func(self: string, start: s32, length: option<s32>) -> string;
+    anchor: func(self: string, name: string) -> string;
+    big: func(self: string) -> string;
+    blink: func(self: string) -> string;
+    bold: func(self: string) -> string;
+    fixed: func(self: string) -> string;
+    fontcolor: func(self: string, colour: string) -> string;
+    fontsize: func(self: string, size: string) -> string;
+    italics: func(self: string) -> string;
+    link: func(self: string, url: string) -> string;
+    small: func(self: string) -> string;
+    strike: func(self: string) -> string;
+    sub: func(self: string) -> string;
+    sup: func(self: string) -> string;
+    trim-left: func(self: string) -> string;
+    trim-right: func(self: string) -> string;
+}
+
+// interface annex-b-date {
+//     use date.{date};
+//     get-year: func(self: borrow<date>) -> s32;
+//     set-year: func(self: borrow<date>, year: s32) -> date;
+//     to-GMT-string: func(self: borrow<date>) -> string;
+// }
+
+// interface annex-b-reg-exp {
+//     use reg-exp.{reg-exp};
+//     compile: func();
+// }

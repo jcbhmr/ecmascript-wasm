@@ -1,0 +1,13 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface array-buffer {
+    use type-error.{type-error};
+    use range-error.{range-error};
+    record constructor-options {
+        max-byte-length: option<u32>,
+    }
+    resource array-buffer {
+        %constructor: static func(length: u32, options: option<constructor-options>) -> result<array-buffer, range-error>;
+        is-view: static func()
+    }
+}

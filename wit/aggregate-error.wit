@@ -1,0 +1,12 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+interface aggregate-error {
+    use types.{any};
+    use error.{options};
+    resource aggregate-error {
+        copy: func() -> aggregate-error;
+        downcast: func() -> error;
+        upcast: static func(v: error) -> aggregate-error;
+        construct: func(errors: list<any>, message: option<string>, options: option<options>) -> result<aggregate-error, any>;
+    }
+}

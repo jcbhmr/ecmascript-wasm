@@ -1,0 +1,19 @@
+package jcbhmr:ecmascript-wasm@16.0.0;
+
+
+interface globals {
+  use types.{undefined, any};
+  get-global-this: func() -> object;
+  get-infinity: func() -> f64;
+  get-nan: func() -> f64;
+  get-undefined: func() -> undefined;
+  eval: func(x: string) -> any;
+  is-finite: func(number: number) -> bool;
+  is-nan: func(number: number) -> bool;
+  parse-float: func(%string: string) -> f64;
+  parse-int: func(%string: string, radix: option<s32>) -> f64;
+  decode-uri: func(encoded-URI: string) -> result<string, any>;
+  decode-uri-component: func(encoded-URI-component: string) -> result<string, any>;
+  encode-uri: func(URI: string) -> result<string, any>;
+  encode-uri-component: func(URI-component: string) -> result<string, any>;
+}
