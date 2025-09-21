@@ -1,3 +1,53 @@
-package jcbhmr:ecmascript@16.0.0;
+package jcbhmr:wajsi@16.0.0;
 
-world imports {}
+interface types {
+  enum type {
+    null,
+    undefined,
+    boolean,
+    number,
+    string,
+    bigint,
+    symbol,
+    object,
+    function,
+  }
+
+  resource value {
+    get-global-object: static func() -> value;
+    get-null: static func() -> value;
+    get-undefined: static func() -> value;
+
+    clone: func() -> value;
+
+    from-string: static func(v: string) -> value;
+    from-bool: static func(v: bool) -> value;
+    from-f64: static func(v: f64) -> value;
+    as-string: func() -> option<string>;
+    as-bool: func() -> option<bool>;
+    as-f64: func() -> option<f64>;
+
+    get: func(k: value) -> result<value, value>;
+    set: func(k: value, v: value) -> result<bool, value>;
+    has: func(k: value) -> result<bool, value>;
+
+    loosely-equals: func(o: value) -> result<bool, value>;
+    equals: func(o: value) -> result<bool, value>;
+    less-than: func(o: value) -> result<bool, value>;
+    unary-plus: func() -> result<f64, value>;
+
+    instance-of: func(c: value) -> result<bool, value>;
+    type: func() -> type;
+
+    delete: func(k: value) -> result<bool, value>;
+    apply: func(this: value, args: list<value>) -> result<value, value>;
+    construct: static func(args: list<value>) -> result<value, value>;
+  }
+
+  import: func(s: string, o: option<value>) -> result<value, value>;
+  get-import-meta: func() -> option<value>;
+};
+
+world imports {
+  import types;
+};
