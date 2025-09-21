@@ -1,53 +1,58 @@
-package jcbhmr:wajsi@16.0.0;
+package jcbhmr:wajsi@0.1.0;
 
 interface types {
-  enum type {
-    null,
+  variant value {
     undefined,
-    boolean,
-    number,
-    string,
-    bigint,
-    symbol,
-    object,
-    function,
+    null,
+    boolean(bool),
+    number(f64),
+    %string(string),
+    object(object),
+    symbol(symbol),
+    bigint(bigint),
+  }
+  value-to-number: func(self: value) -> result<f64, value>;
+  value-to-string: func(self: value) -> result<string, value>;
+  value-to-boolean: func(self: value) -> result<bool, value>;
+  value-to-object: func(self: value) -> result<object, value>;
+  value-instance-of: func(self: value, c: borrow<object>) -> result<bool, value>;
+  value-loosely-equals: func(self: value, o: value) -> result<bool, value>;
+  value-strictly-equals: func(self: value, o: value) -> bool;
+
+  variant property-key {
+    %string(string),
+    symbol(symbol),
   }
 
-  resource value {
-    get-global-object: static func() -> value;
-    get-null: static func() -> value;
-    get-undefined: static func() -> value;
-
-    clone: func() -> value;
-
-    from-string: static func(v: string) -> value;
-    from-bool: static func(v: bool) -> value;
-    from-f64: static func(v: f64) -> value;
-    as-string: func() -> option<string>;
-    as-bool: func() -> option<bool>;
-    as-f64: func() -> option<f64>;
-
-    get: func(k: value) -> result<value, value>;
-    set: func(k: value, v: value) -> result<bool, value>;
-    has: func(k: value) -> result<bool, value>;
-
-    loosely-equals: func(o: value) -> result<bool, value>;
-    equals: func(o: value) -> result<bool, value>;
-    less-than: func(o: value) -> result<bool, value>;
-    unary-plus: func() -> result<f64, value>;
-
-    instance-of: func(c: value) -> result<bool, value>;
-    type: func() -> type;
-
-    delete: func(k: value) -> result<bool, value>;
-    apply: func(this: value, args: list<value>) -> result<value, value>;
-    construct: static func(args: list<value>) -> result<value, value>;
+  resource object {
+    clone: func() -> object;
+    get: func(k: property-key) -> result<value, value>;
+    set: func(k: property-key, v: value) -> result<bool, value>;
+    has: func(k: property-key) -> result<bool, value>;
+    delete: func(k: property-key) -> result<bool, value>;
   }
 
-  import: func(s: string, o: option<value>) -> result<value, value>;
-  get-import-meta: func() -> option<value>;
-};
+  resource callable {
+    clone: func() -> callable;
+    downcast: static func(o: borrow<object>) -> option<callable>;
+    upcast: func() -> object;
+    call: func(this: value, args: list<value>) -> result<value, value>;
+    construct: func(args: list<value>) -> result<value, value>;
+  }
+
+  resource symbol {
+    clone: func() -> symbol;
+  }
+
+  resource bigint {
+    clone: func() -> bigint;
+  }
+
+  %import: func(s: string, o: option<value>) -> result<object, value>;
+  get-import-meta: func() -> option<object>;
+  get-global-object: func() -> object;
+}
 
 world imports {
   import types;
-};
+}

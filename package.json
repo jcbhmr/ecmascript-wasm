@@ -1,0 +1,13 @@
+{
+  "name": "@jcbhmr/wajsi",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test"
+  },
+  "devDependencies": {
+    "@bytecodealliance/jco": "^1.15.0",
+    "execa": "^9.6.0",
+    "typescript": "^5.9.2"
+  }
+}
