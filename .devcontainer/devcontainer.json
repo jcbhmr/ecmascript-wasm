@@ -1,0 +1,15 @@
+{
+    "image": "mcr.microsoft.com/devcontainers/javascript-node",
+    "features": {
+        "ghcr.io/devcontainers/features/rust": {},
+        "ghcr.io/devcontainers/features/go": {}
+    },
+    "updateContentCommand": "curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash && cargo binstall -y wasm-tools && cd \"$(mktemp -d)\" && wget https://github.com/tinygo-org/tinygo/releases/download/v0.39.0/tinygo_0.39.0_amd64.deb && sudo dpkg -i tinygo_0.39.0_amd64.deb && curl https://wasmtime.dev/install.sh -sSf | bash",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bytecodealliance.wit-idl"
+            ]
+        }
+    }
+}
